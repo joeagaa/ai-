@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+
+data/*
+out/*
+!data/.gitkeep
+!out/.gitkeep
+!out/models/.gitkeep
+!out/logs/.gitkeep
+
+*.pkl
+*.joblib
+*.log
