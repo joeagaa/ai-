@@ -1,20 +1,19 @@
-"""
-Feature engineering helpers.
-
-Replace this with your real feature logic later.
-"""
-
 import pandas as pd
+
+TARGET_COL = "y"
 
 def make_features(df: pd.DataFrame):
     """
-    Expects a target column named 'y' in your dataset.
-    Returns X (features) and y (target).
+    Expects a target column named 'y'.
+    Everything else is treated as numeric features.
     """
-    if "y" not in df.columns:
-        raise ValueError("Expected a target column named 'y' in your dataset.")
+    if TARGET_COL not in df.columns:
+        raise ValueError(f"Missing target column '{TARGET_COL}' in CSV.")
 
-    y = df["y"]
-    X = df.drop(columns=["y"])
+    y = df[TARGET_COL]
+    X = df.drop(columns=[TARGET_COL])
+
+    # force numeric (simple starter)
+    X = X.apply(pd.to_numeric, errors="coerce").fillna(0.0)
 
     return X, y
